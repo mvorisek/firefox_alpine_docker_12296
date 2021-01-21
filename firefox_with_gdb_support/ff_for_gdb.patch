@@ -1,0 +1,33 @@
+diff --git a/community/firefox/APKBUILD b/community/firefox/APKBUILD
+index d473981f57..9ff7e4a39c 100644
+--- a/community/firefox/APKBUILD
++++ b/community/firefox/APKBUILD
+@@ -83,7 +83,7 @@ source="https://ftp.mozilla.org/pub/firefox/releases/$pkgver/source/firefox-$pkg
+ 	avoid-redefinition.patch
+ 	"
+ 
+-subpackages="$pkgname-npapi"
++subpackages="$pkgname-npapi $pkgname-dbg"
+ 
+ _mozappdir=/usr/lib/firefox
+ 
+@@ -301,6 +301,8 @@ build() {
+ 			;;
+ 		*) _rust_simd="--enable-rust-simd" ;;
+ 	esac
++    
++    export RUSTFLAGS="$RUSTFLAGS -C debuginfo=2"
+ 
+ 	../mach configure \
+ 		--prefix=/usr \
+@@ -343,7 +345,9 @@ build() {
+ 		--with-system-webp \
+ 		--with-system-zlib \
+ 		--with-clang-path=/usr/bin/clang \
+-		--with-libclang-path=/usr/lib
++        --with-libclang-path=/usr/lib \
++        --enable-debug \
++        --enable-debug-symbols
+ 	../mach build
+ }
+ 

@@ -1,0 +1,5 @@
+# split/join based on https://gist.github.com/jpetitcolas/9736406
+
+split --bytes=80M firefox-dbg-84.0.2-r0.apk firefox-dbg-84.0.2-r0.apk-split
+
+cat firefox-dbg-84.0.2-r0.apk-split* > firefox-dbg-84.0.2-r0.apk
